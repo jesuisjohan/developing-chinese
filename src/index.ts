@@ -78,14 +78,41 @@ const printWordsTable = (
 const main = async () => {
     console.log('Welcome to the Chinese learning program!')
 
-    const shouldShuffleLessons = await askQuestion(
-        'Do you want to shuffle the lessons? (y/n) '
+    let shuffledLessons: [string, Lesson][] = []
+
+    const shouldSpecifyLessons = await askQuestion(
+        'Do you want to specify the lessons? (y/n) '
     )
 
-    const shuffledLessons =
-        shouldShuffleLessons.toLowerCase() === 'y'
-            ? shuffleArray(Object.entries(LESSONS))
-            : Object.entries(LESSONS)
+    if (shouldSpecifyLessons.toLowerCase() === 'y') {
+        const lessonKeys = Object.keys(LESSONS)
+
+        console.log('Available lessons:')
+        lessonKeys.forEach((key, index) => {
+            console.log(`${index + 1}: ${key}`)
+        })
+
+        const selectedLessons = await askQuestion(
+            'Enter the lesson numbers you want to practice (comma-separated): '
+        )
+
+        const selectedLessonKeys = selectedLessons
+            .split(',')
+            .map((key) => key.trim())
+
+        shuffledLessons = Object.entries(LESSONS).filter(([key]) =>
+            selectedLessonKeys.includes(key)
+        )
+    } else {
+        const shouldShuffleLessons = await askQuestion(
+            'Do you want to shuffle the lessons? (y/n) '
+        )
+
+        shuffledLessons =
+            shouldShuffleLessons.toLowerCase() === 'y'
+                ? shuffleArray(Object.entries(LESSONS))
+                : Object.entries(LESSONS)
+    }
 
     for (const [key, { title, newWords }] of shuffledLessons) {
         console.log(`Lesson ${key}: ${title}`)
