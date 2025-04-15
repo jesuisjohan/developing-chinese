@@ -32,14 +32,19 @@ const askUntilCorrect = async (props: AskUntilCorrectProps) => {
 
     let answer = ''
 
+    let perfectAnswer = true
+
     while (answer !== finalCorrectAnswer) {
         answer = await askQuestion(question)
         if (answer === finalCorrectAnswer) {
             console.log('Correct!')
         } else {
             console.log(`Incorrect. The correct answer is: ${correctAnswer}`)
+            perfectAnswer = false
         }
     }
+
+    return perfectAnswer
 }
 
 const shuffleArray = <T>(target: T[]) => {
@@ -102,8 +107,10 @@ const main = async () => {
 
         const allPinyin = newWords.map(([, pinyin]) => pinyin)
 
+        let imperfectNewWords: NewWord[] = []
+
         for (const [word, pinyin, meaning] of shuffledNewWords) {
-            await askUntilCorrect({
+            const p0 = await askUntilCorrect({
                 question: `What is the meaning of "${word}"? `,
                 correctAnswer: meaning,
                 type: 'meaning',
@@ -117,17 +124,63 @@ const main = async () => {
 
             const pinyinIndex = shuffledPinyin.indexOf(pinyin) + 1
 
-            await askUntilCorrect({
+            const p1 = await askUntilCorrect({
                 question: `What is the pinyin for "${word}"? `,
                 correctAnswer: `${pinyinIndex}`,
                 type: 'pinyin',
             })
 
-            await askUntilCorrect({
+            const p2 = await askUntilCorrect({
                 question: `Type this word again: "${word}" `,
                 correctAnswer: word,
                 type: 'word',
             })
+
+            if (p0 && p1 && p2) {
+                console.log('Perfect!')
+            } else {
+                imperfectNewWords.push([word, pinyin, meaning])
+            }
+        }
+
+        while (imperfectNewWords.length > 0) {
+            console.log('You have some words to practice again.')
+
+            for (const [word, pinyin, meaning] of imperfectNewWords) {
+                const p0 = await askUntilCorrect({
+                    question: `What is the meaning of "${word}"? `,
+                    correctAnswer: meaning,
+                    type: 'meaning',
+                })
+
+                console.log('All pinyin options:')
+
+                const shuffledPinyin = shuffleArray(allPinyin)
+
+                printWordsTable(shuffledPinyin, 2, 25)
+
+                const pinyinIndex = shuffledPinyin.indexOf(pinyin) + 1
+
+                const p1 = await askUntilCorrect({
+                    question: `What is the pinyin for "${word}"? `,
+                    correctAnswer: `${pinyinIndex}`,
+                    type: 'pinyin',
+                })
+
+                const p2 = await askUntilCorrect({
+                    question: `Type this word again: "${word}" `,
+                    correctAnswer: word,
+                    type: 'word',
+                })
+
+                if (p0 && p1 && p2) {
+                    console.log('Perfect!')
+
+                    imperfectNewWords = imperfectNewWords.filter(
+                        ([w]) => w !== word
+                    )
+                }
+            }
         }
     }
 
