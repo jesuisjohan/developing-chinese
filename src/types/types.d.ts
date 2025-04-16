@@ -1,4 +1,4 @@
-type Lessons = Record<string, Lesson>
+type Lessons = Record<number, Lesson>
 
 type Lesson = {
     title: string
