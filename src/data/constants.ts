@@ -55,11 +55,7 @@ export const LESSONS: Lessons = {
             ['联系', 'liánxì', 'liên lạc'],
             ['如果', 'rúguǒ', 'nếu'],
             ['活动', 'huódòng', 'hoạt động'],
-            [
-                '就',
-                'jiù',
-                'chỉ ra một kể quả tự nhiên trong các điều kiện hoặc hoàn cảnh nhất đinh',
-            ],
+            ['就', 'jiù', 'tựu'],
             ['短信', 'duǎnxìn', 'tin nhắn'],
             ['平安大街', "píng'ān dàjiē", 'phố Bình An'],
             ['感恩节', "gǎn'ēn jié", 'Lễ Tạ Ơn'],
