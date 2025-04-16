@@ -145,11 +145,13 @@ const main = async () => {
 
             console.log('All pinyin options:')
 
-            const shuffledPinyin = shuffleArray(allPinyin)
+            const pinyinOptions = [...allPinyin].sort((a, b) => {
+                return a.localeCompare(b)
+            })
 
-            printWordsTable(shuffledPinyin, 2, 25)
+            printWordsTable(pinyinOptions, 2, 25)
 
-            const pinyinIndex = shuffledPinyin.indexOf(pinyin) + 1
+            const pinyinIndex = pinyinOptions.indexOf(pinyin) + 1
 
             const p1 = await askUntilCorrect({
                 question: `What is the pinyin for "${word}"? `,
@@ -182,11 +184,13 @@ const main = async () => {
 
                 console.log('All pinyin options:')
 
-                const shuffledPinyin = shuffleArray(allPinyin)
+                const pinyinOptions = [...allPinyin].sort((a, b) => {
+                    return a.localeCompare(b)
+                })
 
-                printWordsTable(shuffledPinyin, 2, 25)
+                printWordsTable(pinyinOptions, 2, 25)
 
-                const pinyinIndex = shuffledPinyin.indexOf(pinyin) + 1
+                const pinyinIndex = pinyinOptions.indexOf(pinyin) + 1
 
                 const p1 = await askUntilCorrect({
                     question: `What is the pinyin for "${word}"? `,
