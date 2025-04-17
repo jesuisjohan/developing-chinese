@@ -8,7 +8,6 @@ export const LESSONS: Lessons = {
             ['遇到', 'yù dào', 'gặp phải'],
             ['一些', 'yì xiē', 'một vài'],
             ['不习惯', 'bù xí guàn', 'không quen'],
-            ['的', 'de', 'trợ từ (liên kết)'],
             ['事情', 'shì qíng', 'sự việc'],
             ['怎么办', 'zěn me bàn', 'làm sao bây giờ'],
             ['呢', 'ne', ''],
