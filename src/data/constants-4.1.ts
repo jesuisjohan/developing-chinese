@@ -2,13 +2,9 @@ export const LESSONS: Lessons = {
     [1]: {
         title: '入乡随俗',
         newWords: [
-            ['一个', 'yí gè', 'một (người/vật)'],
-            ['人', 'rén', 'người'],
             ['到了', 'dào le', 'đã đến'],
             ['新的', 'xīn de', 'mới'],
             ['地方', 'dì fāng', 'nơi chốn'],
-            ['可能', 'kě néng', 'có thể'],
-            ['会', 'huì', ['sẽ', 'có thể']],
             ['遇到', 'yù dào', 'gặp phải'],
             ['一些', 'yì xiē', 'một vài'],
             ['不习惯', 'bù xí guàn', 'không quen'],
