@@ -15,7 +15,7 @@ export const LESSONS: Lessons = {
             ['的', 'de', 'trợ từ (liên kết)'],
             ['事情', 'shì qíng', 'sự việc'],
             ['怎么办', 'zěn me bàn', 'làm sao bây giờ'],
-            ['呢', 'ne', 'trợ từ (nhấn mạnh câu hỏi)'],
+            ['呢', 'ne', ''],
             ['最好的', 'zuì hǎo de', 'tốt nhất'],
             ['办法', 'bàn fǎ', 'biện pháp'],
             ['就是', 'jiù shì', 'chính là'],
