@@ -1,6 +1,6 @@
 import * as readline from 'readline'
 
-import { LESSONS } from './data/constants'
+import { LESSONS } from './data/constants-4.1'
 
 Object.entries(LESSONS).forEach(([key, { title, newWords }]) => {
     console.log(`Lesson ${key}: ${title}`)
