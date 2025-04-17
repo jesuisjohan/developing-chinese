@@ -8,10 +8,10 @@ type Lesson = {
 type NewWord = [Word, Pinyin, Meaning]
 type Word = string
 type Pinyin = string
-type Meaning = string
+type Meaning = string | string[]
 
 type AskUntilCorrectProps = {
     question: string
-    correctAnswer: string
+    correctAnswers: string | string[]
     type: 'word' | 'pinyin' | 'meaning'
 }

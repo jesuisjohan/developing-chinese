@@ -25,21 +25,31 @@ const askQuestion = (question: string) => {
 }
 
 const askUntilCorrect = async (props: AskUntilCorrectProps) => {
-    const { question, correctAnswer, type } = props
+    const { question, correctAnswers, type } = props
 
-    const finalCorrectAnswer =
-        type === 'meaning' ? correctAnswer.toLowerCase() : correctAnswer
+    const _correctAnswerArray = Array.isArray(correctAnswers)
+        ? correctAnswers
+        : [correctAnswers]
+
+    const finalCorrectAnswers =
+        type === 'meaning'
+            ? _correctAnswerArray.map((answer) => answer.toLowerCase())
+            : _correctAnswerArray
 
     let answer = ''
 
     let perfectAnswer = true
 
-    while (answer !== finalCorrectAnswer) {
+    while (!finalCorrectAnswers.includes(answer)) {
         answer = await askQuestion(question)
-        if (answer === finalCorrectAnswer) {
+        if (finalCorrectAnswers.includes(answer)) {
             console.log('Correct!')
         } else {
-            console.log(`Incorrect. The correct answer is: ${correctAnswer}`)
+            console.log(
+                `Incorrect. The correct answers are: ${finalCorrectAnswers.join(
+                    ', '
+                )}`
+            )
             perfectAnswer = false
         }
     }
@@ -139,7 +149,7 @@ const main = async () => {
         for (const [word, pinyin, meaning] of shuffledNewWords) {
             const p0 = await askUntilCorrect({
                 question: `What is the meaning of "${word}"? `,
-                correctAnswer: meaning,
+                correctAnswers: meaning,
                 type: 'meaning',
             })
 
@@ -155,13 +165,13 @@ const main = async () => {
 
             const p1 = await askUntilCorrect({
                 question: `What is the pinyin for "${word}"? `,
-                correctAnswer: `${pinyinIndex}`,
+                correctAnswers: `${pinyinIndex}`,
                 type: 'pinyin',
             })
 
             const p2 = await askUntilCorrect({
                 question: `Type this word again: "${word}" `,
-                correctAnswer: word,
+                correctAnswers: word,
                 type: 'word',
             })
 
@@ -178,7 +188,7 @@ const main = async () => {
             for (const [word, pinyin, meaning] of imperfectNewWords) {
                 const p0 = await askUntilCorrect({
                     question: `What is the meaning of "${word}"? `,
-                    correctAnswer: meaning,
+                    correctAnswers: meaning,
                     type: 'meaning',
                 })
 
@@ -194,13 +204,13 @@ const main = async () => {
 
                 const p1 = await askUntilCorrect({
                     question: `What is the pinyin for "${word}"? `,
-                    correctAnswer: `${pinyinIndex}`,
+                    correctAnswers: `${pinyinIndex}`,
                     type: 'pinyin',
                 })
 
                 const p2 = await askUntilCorrect({
                     question: `Type this word again: "${word}" `,
-                    correctAnswer: word,
+                    correctAnswers: word,
                     type: 'word',
                 })
 
