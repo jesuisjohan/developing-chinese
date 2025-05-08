@@ -60,7 +60,7 @@ export const LESSONS: Lessons = {
             ['摆', 'bǎi', 'bày'],
             ['堆', 'duī', 'chất đống'],
             ['脏', 'zāng', 'bẩn'],
-            ['乱七八糟', 'lùn qī bā zāo', 'lộn xộn'],
+            ['乱七八糟', 'luàn qī bā zāo', 'lộn xộn'],
             ['墙角', 'qiáng jiǎo', 'góc tường'],
             ['垃圾', 'lā jī', 'rác'],
             ['箱', 'xiāng', 'hòm'],
